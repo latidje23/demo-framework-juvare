@@ -1,0 +1,31 @@
+{
+  "name": "demo-juvare",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "typecheck": "tsc --noEmit",
+  "lint": "eslint .",
+  "test": "playwright test",
+  "test:chromium": "playwright test --project=chromium",
+  "test:headed": "playwright test --headed",
+  "test:report": "playwright show-report"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6",
+    "@babel/core": "^8.1.0",
+    "@babel/eslint-parser": "^8.0.7",
+    "@babel/plugin-syntax-typescript": "^8.0.3",
+    "@eslint/js": "^10.0.1",
+    "dotenv": "^18.0.9",
+    "eslint": "^10.14.0",
+    "typescript": "^7.0.2"
+  }
+}
