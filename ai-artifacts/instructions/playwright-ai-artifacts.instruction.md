@@ -18,6 +18,22 @@ Single source of truth for generating and maintaining this project's Playwright 
 - Use `test.describe()` to group tests and `test.beforeEach()` for shared setup. Add comments only to explain non-obvious intent.
 - Do not use `page.waitForNavigation()`, `page.waitForLoadState()`, `page.waitForTimeout()`, or `page.evaluate()`. Prefer Playwright's auto-waiting, explicit assertions, and APIs. Do not create duplicate page objects for similar pages or leave `test.only()` in committed code.
 
+## Evidence and Verification
+
+- Verify page-object methods, fixtures, test data, configuration, and APIs in the current project before using them. Treat examples as illustrative, not authoritative.
+- Verify UI behavior, locators, and expected values from the application, requirements, or test evidence. Do not invent missing behavior or selectors.
+- If necessary evidence is unavailable or requirements are ambiguous, state the limitation and ask for clarification rather than guessing.
+- Assert the requested outcome directly, including relationships and ordering; element presence alone does not prove a sort, price association, or workflow.
+- Report commands actually run and their outcomes. Never claim a test passed if it was not run or did not complete; report failures, skipped checks, and blockers.
+- Distinguish observed facts from assumptions and unverified conclusions.
+
+## Diagnose a Playwright Failure
+
+1. Identify the failing test and assertion, expected and actual behavior, and reproduction command. Gather available traces, screenshots, and logs; request missing evidence if needed.
+2. Reproduce the failure when possible. Inspect the relevant test, fixture, page object, configuration, test data, and UI. Determine the root cause from evidence; do not assume the application is at fault.
+3. Make the smallest safe fix, preserving POM and test intent. Do not weaken assertions, hide exceptions, or add arbitrary waits.
+4. Rerun the failing test, `npm run lint`, and `npm run typecheck`. Report the evidence, root cause, commands and results, remaining uncertainty, and what a human reviewer should verify.
+
 ## POM Structure
 
 ### Page objects
