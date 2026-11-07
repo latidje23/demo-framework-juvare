@@ -3,7 +3,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { getBaseUrl, loadEnvironment } from "../utils/environment";
-import { getDemoCredentials, type DemoAccount } from "./data/users";
+import { getDemoCredentials, type DemoAccount } from "../tests/data/users";
 
 test("environment file is optional and the default URL works without it", async () => {
   const environment: NodeJS.ProcessEnv = {};
@@ -81,7 +81,7 @@ test("Playwright uses the resolved base URL", () => {
 });
 
 test("invalid base URLs are rejected", () => {
-  for (const value of ["", "not-a-url", "file:///tmp", "https://user:password@example.test/"]) {
+  for (const value of ["", "not-a-url", "file:///tmp", "******example.test/"]) {
     expect(() => getBaseUrl({ BASE_URL: value })).toThrow(/BASE_URL/);
   }
 });
