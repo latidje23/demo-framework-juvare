@@ -11,21 +11,12 @@ export class FooterPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.socialLinks = page.locator("footer, [role='contentinfo']").locator("ul a");
-    this.xLink = page
-      .locator("footer, [role='contentinfo']")
-      .locator("a")
-      .filter({ hasText: "X" });
-    this.facebookLink = page
-      .locator("footer, [role='contentinfo']")
-      .locator("a")
-      .filter({ hasText: "Facebook" });
-    this.linkedInLink = page
-      .locator("footer, [role='contentinfo']")
-      .locator("a")
-      .filter({ hasText: "LinkedIn" });
-    this.copyrightText = page.locator("footer, [role='contentinfo']");
-    this.footerContainer = page.locator("footer, [role='contentinfo']");
+    this.footerContainer = page.getByRole("contentinfo");
+    this.socialLinks = this.footerContainer.getByRole("listitem").getByRole("link");
+    this.xLink = this.footerContainer.getByRole("link", { name: "X" });
+    this.facebookLink = this.footerContainer.getByRole("link", { name: "Facebook" });
+    this.linkedInLink = this.footerContainer.getByRole("link", { name: "LinkedIn" });
+    this.copyrightText = this.footerContainer;
   }
 
   async verifyXLinkExists(): Promise<void> {

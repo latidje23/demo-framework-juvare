@@ -58,8 +58,10 @@ On Linux, use `npx playwright install --with-deps chromium` for system dependenc
 **Examples:**
 ```powershell
 npm run test:chromium -- auth.spec.ts -g "login"  # Run tests matching pattern
+npm run test:chromium -- footer.spec.ts           # Run a specific spec file
 npm run test:chromium -- --workers=4              # Parallel execution
 npm run test:headed                               # Watch tests in browser
+npm run test:chromium -- test-setup/config-validation.spec.ts  # Run config validation spec
 ```
 
 ## Project Structure
@@ -68,12 +70,24 @@ npm run test:headed                               # Watch tests in browser
 pages/                     Page Object Model classes
 fixtures/                  Test-scoped page object fixtures
 tests/                     Test suites
-  ├── auth.spec.ts        Login and authentication
-  ├── inventory.spec.ts    Product listing and filtering
-  ├── cart.spec.ts         Shopping cart operations
-  ├── checkout.spec.ts     Purchase flow
-  └── data/               Test data (users, checkout info)
+  ├── auth.spec.ts             Login and authentication
+  ├── inventory.spec.ts        Product listing, sorting, and filtering
+  ├── cart.spec.ts             Shopping cart operations
+  ├── checkout.spec.ts         Purchase flow
+  ├── footer.spec.ts           Footer links and legal text
+  ├── home-page.spec.ts        Home page opens at the configured base URL
+  ├── page-objects.spec.ts     Page object / fixture integration workflows
+  ├── product-price-filter.spec.ts  Price (high to low) sorting verification
+  ├── sauceLab.spec.ts         About sidebar navigation
+  ├── example.spec.ts          Playwright starter template (not SauceDemo)
+  ├── seed.spec.ts             Placeholder/test template
+  └── data/                    Test data
+      ├── users.ts             Demo account credentials
+      └── checkout.ts          Checkout info + sample product data
 utils/                     Configuration helpers (environment loading)
+test-setup/                Startup / configuration validation specs
+specs/                     Test plans (README only)
+.vscode/                   Editor settings (workspace, Playwright MCP)
 .github/                   AI guidance (single source of truth) + GitHub Actions workflows
 │ ├── agents/             Role-specific AI agents (planner, generator, healer)
 │ ├── instructions/       Coding standards, agent rules, approval rules
@@ -83,7 +97,11 @@ utils/                     Configuration helpers (environment loading)
 │ └── copilot-instructions.md
 playwright.config.ts       Playwright configuration (Chromium, reporters)
 .env.example              Safe credential template
+tsconfig.json             TypeScript configuration
+eslint.config.mjs         ESLint flat configuration
+package.json              Projects scripts, dependencies, and Node engine
 ```
+> **Note:** `playwright.config.ts` sets `testDir` to `./tests`, so `npm test`, `npm run test:chromium`, and the CI workflows run specs under `tests/` only. The `test-setup/` validation spec requires an explicit path (e.g., `npm run test:chromium -- test-setup/config-validation.spec.ts`).
 
 **Key Concepts:**
 

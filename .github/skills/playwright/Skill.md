@@ -17,13 +17,18 @@ Follow the [project guidelines](../../instructions/coding-standards.instructions
 2. **Use Fixture Injection in Tests**:
    - Import test from `../fixtures/test` (NOT from `@playwright/test`)
    - Request page objects as fixture parameters
-   - Never use `page.goto()`, `page.getByTestId()`, or raw locators in test code
+   - Never use `page.goto()`, `page.getByTestId()`, or raw locators directly in test code — delegate to page-object methods and locators.
    - Example: `test('name', async ({ loginPage, inventoryPage }) => { ... })`
 
-3. **Define Locators in Page Objects**:
+3. **Define Resilient Locators in Page Objects**:
    - Create readonly Locator properties for each UI element
    - Encapsulate complex locator logic (filtering, scoping) in the page object
-   - Example: `readonly xLink = page.locator('a').filter({ hasText: 'X' })`
+   - **Prioritize resilient locator strategies over brittle CSS/tag selectors.** Use, in order of preference:
+     1. `getByTestId()` backed by `data-test` attributes — e.g. `page.getByTestId('inventory-item')`
+     2. Accessible roles with `getByRole()` — e.g. `page.getByRole('button', { name: 'Checkout' })`
+     3. `getByLabel()`, `getByPlaceholder()`, or `getByText()` where a semantic handle exists
+   - Avoid `page.locator()` with raw tag/CSS selectors (e.g. `page.locator('a')`), CSS classes, or XPath unless no resilient alternative exists. When unavoidable, scope and filter narrowly rather than selecting broadly (e.g. `page.getByRole('contentinfo').getByRole('link', { name: 'X' })`).
+   - Example: `readonly xLink = page.getByRole('link', { name: 'X' })`
 
 4. **Create Methods for User Actions**:
    - Define typed methods for user interactions in page objects
