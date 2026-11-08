@@ -4,35 +4,32 @@ Thank you for your interest in contributing! This guide explains how to contribu
 
 ## Project Structure
 
-### Single Source of Truth: `ai-artifacts/`
+### Single Source of Truth: `.github/`
 
-All project guidance is centralized in the **`ai-artifacts/`** directory:
-
-```
-ai-artifacts/
-├── instructions/
-│   └── playwright-typescript.instructions.md     ← Coding standards
-├── prompts/
-│   ├── create-test.prompt.md                     ← Create/extend tests
-│   └── diagnose-failure.prompt.md                ← Debug failures
-└── skills/
-    └── playwright-test-maintenance/
-        └── SKILL.md                              ← Maintenance workflow
-```
-
-**Key Principle**: All instructions, prompts, and skills are maintained in **one place only**. There are no duplicate files elsewhere.
-
-### GitHub-Specific Configuration: `.github/`
-
-The `.github/` directory contains only GitHub Actions workflows and GitHub-specific configurations:
+All project AI guidance is centralized under **`.github/`**:
 
 ```
 .github/
-├── workflows/                                    ← CI/CD automation
-├── agents/                                       ← GitHub action agents
-├── skills/                                       ← GitHub integration skills
-└── README.md                                     ← Directory purpose explanation
+├── instructions/
+│   ├── coding-standards.instructions.md     ← Coding standards (POM conventions)
+│   ├── agent-rules.instructions.md          ← Cross-cutting agent rules
+│   └── approval-rules.instructions.md       ← When human approval is required
+├── prompts/
+│   ├── create-test.prompt.md                ← Create/extend tests
+│   └── diagnose-failure.prompt.md           ← Debug failures
+├── agents/
+│   ├── playwright-test-planner.agent.md     ← Test planning
+│   ├── playwright-test-generator.agent.md   ← Test generation
+│   └── playwright-test-healer.agent.md      ← Failure diagnosis
+├── skills/
+│   ├── playwright/Skill.md                  ← Playwright maintenance workflow
+│   └── reporting/Skill.md                   ← Test reporting workflow
+├── workflows/                               ← CI/CD automation
+├── copilot-instructions.md                  ← Copilot entrypoint
+└── README.md                                ← Directory purpose explanation
 ```
+
+**Key Principle**: All instructions, prompts, and skills are maintained in **one place only**. There are no duplicate files elsewhere.
 
 ## Contributing New Features
 
@@ -40,9 +37,9 @@ The `.github/` directory contains only GitHub Actions workflows and GitHub-speci
 
 Start by reading the canonical guidance:
 
-- **For test development**: `ai-artifacts/instructions/playwright-typescript.instructions.md`
-- **To create a new test**: Use `ai-artifacts/prompts/create-test.prompt.md`
-- **To debug a failure**: Use `ai-artifacts/prompts/diagnose-failure.prompt.md`
+- **For test development**: `.github/instructions/coding-standards.instructions.md`
+- **To create a new test**: Use `.github/prompts/create-test.prompt.md`
+- **To debug a failure**: Use `.github/prompts/diagnose-failure.prompt.md`
 
 ### Step 2: Follow Existing Patterns
 
@@ -61,9 +58,9 @@ In VS Code Copilot chat, you can:
 
 1. Use the **/create-test** prompt to generate new test code
 2. Use the **/diagnose-failure** prompt to fix failing tests
-3. Invoke the **playwright-test-maintenance** skill for complex workflows
+3. Invoke the **playwright** skill (or **reporting** skill) for specialized workflows
 
-Type `/` in the Copilot chat to see available prompts and skills. If discovery isn't working, manually reference the files in `ai-artifacts/`.
+Type `/` in the Copilot chat to see available prompts and skills. If discovery isn't working, manually reference the files in `.github/prompts/` and `.github/skills/`.
 
 ### Step 4: Validate Your Changes
 
@@ -87,7 +84,7 @@ npm run test:report
 
 ### New Instruction
 
-Add to **`ai-artifacts/instructions/`** only (not to `.github/`):
+Add to **`.github/instructions/`** only:
 
 ```markdown
 ---
@@ -105,7 +102,7 @@ applyTo: "files/**/*.ts"
 
 ### New Prompt
 
-Add to **`ai-artifacts/prompts/`** only (not to `.github/`):
+Add to **`.github/prompts/`** only:
 
 ```markdown
 ---
@@ -131,28 +128,27 @@ Show an example input and expected output...
 
 ### New Skill
 
-Add to **`ai-artifacts/skills/`** and follow VS Code Copilot skill conventions.
+Add to **`.github/skills/<name>/Skill.md`** and follow VS Code Copilot skill conventions.
+
+### New Agent
+
+Add to **`.github/agents/<name>.agent.md`** following the existing agent frontmatter (name, description, tools, model, mcp-servers).
 
 ## Important: Don't Duplicate
 
-- ❌ **Don't** add instructions to `.github/instructions/`
-- ❌ **Don't** add prompts to `.github/prompts/`
-- ✅ **Do** add everything to `ai-artifacts/` only
+- ✅ **Do** add all instructions, prompts, skills, and agents under `.github/` only
+- ❌ **Don't** create parallel copies elsewhere (e.g., an `ai-artifacts/` directory or a second prompts folder)
 
-The `.github/` directory is reserved for GitHub-specific configuration.
+Keep each artifact in **one place only** under `.github/`.
 
-## Consolidation History
+## Removed `ai-artifacts/`
 
-Previously, instructions and prompts were duplicated in both `.github/` and `ai-artifacts/`, which caused:
-
-- Multiple maintenance points
-- Risk of inconsistency (e.g., POM updates in one location but not the other)
-- Confusion about the authoritative version
+Earlier, AI guidance lived in a separate `ai-artifacts/` directory. To have a single, discoverable location, all of its content was consolidated under `.github/` and `ai-artifacts/` was deleted.
 
 As of the latest consolidation:
 
-- ✅ All duplicates were removed from `.github/`
-- ✅ All guidance is now in `ai-artifacts/` only
+- ✅ All guidance (instructions, prompts, skills, agents) is under `.github/` only
+- ✅ `ai-artifacts/` has been removed
 - ✅ README files document the structure
 - ✅ All tools, tests, and linting pass
 
@@ -161,6 +157,6 @@ This ensures consistency and makes the project easier to maintain.
 ## Questions?
 
 Refer to:
-- `ai-artifacts/README.md` - Structure and usage guide
-- `.github/README.md` - GitHub-specific configuration explanation
+- `.github/README.md` - AI guidance structure and usage
+- `.github/copilot-instructions.md` - Copilot / AI assistant entrypoint
 - `README.md` - Project overview and setup instructions

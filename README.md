@@ -74,8 +74,13 @@ tests/                     Test suites
   ├── checkout.spec.ts     Purchase flow
   └── data/               Test data (users, checkout info)
 utils/                     Configuration helpers (environment loading)
-ai-artifacts/              AI development guidance (single source of truth)
-.github/                   GitHub Actions workflows
+.github/                   AI guidance (single source of truth) + GitHub Actions workflows
+│ ├── agents/             Role-specific AI agents (planner, generator, healer)
+│ ├── instructions/       Coding standards, agent rules, approval rules
+│ ├── prompts/            /create-test, /diagnose-failure templates
+│ ├── skills/             playwright/ and reporting/ skills
+│ ├── workflows/          CI (playwright.yml, smoke-ci.yml)
+│ └── copilot-instructions.md
 playwright.config.ts       Playwright configuration (Chromium, reporters)
 .env.example              Safe credential template
 ```
@@ -112,13 +117,14 @@ npx playwright show-trace "path\to\trace.zip"
 
 ## AI-Assisted Development
 
-All AI guidance is in **`ai-artifacts/`** (single source of truth):
+All AI guidance is in **`.github/`** (single source of truth):
 
-- **Instructions:** `ai-artifacts/instructions/playwright-typescript.instructions.md` — Coding standards
-- **Prompts:** `ai-artifacts/prompts/` — `/create-test`, `/diagnose-failure` commands
-- **Skills:** `ai-artifacts/skills/` — VS Code Copilot workflows
+- **Instructions:** `.github/instructions/coding-standards.instructions.md` — Coding standards
+- **Prompts:** `.github/prompts/` — `/create-test`, `/diagnose-failure` commands
+- **Skills:** `.github/skills/` — VS Code Copilot workflows
+- **Agents:** `.github/agents/` — Role-specific Playwright agents
 
-In VS Code Copilot chat, use `/` to access prompts and skills. See [ai-artifacts/README.md](./ai-artifacts/README.md) for details.
+In VS Code Copilot chat, use `/` to access prompts and skills. See [.github/README.md](./.github/README.md) and [.github/copilot-instructions.md](./.github/copilot-instructions.md) for details.
 
 ## Continuous Integration
 
@@ -129,13 +135,14 @@ In VS Code Copilot chat, use `/` to access prompts and skills. See [ai-artifacts
 - Runs type-check, lint, and Chromium suite
 - Uploads HTML report (30-day retention on failure)
 
+`.github/workflows/smoke-ci.yml` runs a fast `auth` smoke set on the same push/PR gates.
+
 Environment variables override `.env` values.
 
 ## Documentation
 
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — Contributing guidelines and development workflows
-- [ai-artifacts/README.md](./ai-artifacts/README.md) — AI artifacts structure and usage
-- [.github/README.md](./.github/README.md) — GitHub-specific configuration
+- [.github/README.md](./.github/README.md) — AI guidance and GitHub-specific configuration
 
 ## 👨‍🏫 Author
 

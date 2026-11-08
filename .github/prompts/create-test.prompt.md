@@ -5,7 +5,7 @@ argument-hint: "Describe the user flow and expected outcomes"
 ---
 # Create a Playwright test
 
-Follow [Playwright guidelines](../instructions/playwright-ai-artifacts.instruction.md).
+Follow [Playwright guidelines](../instructions/coding-standards.instructions.md).
 
 Use the user's request to identify the user flow, fresh starting state, expected success and error outcomes, and relevant data. If a necessary behavior is unclear, ask before inventing it. Inspect the application and existing coverage where practical.
 

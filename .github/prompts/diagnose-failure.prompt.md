@@ -5,7 +5,7 @@ argument-hint: "Provide the failing test, assertion, and available trace or logs
 ---
 # Diagnose a Playwright failure
 
-Follow [Playwright guidelines](../instructions/playwright-ai-artifacts.instruction.md).
+Follow [Playwright guidelines](../instructions/coding-standards.instructions.md).
 
 Identify the failing test and assertion, expected and actual behavior, reproduction command, and available trace, screenshot, or log evidence. Request missing information if it is needed to distinguish causes. Inspect the relevant test, fixture, page object, and UI before deciding on a fix.
 

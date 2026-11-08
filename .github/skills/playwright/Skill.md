@@ -5,7 +5,7 @@ description: "Use when creating, updating, or debugging SauceDemo Playwright Typ
 
 # Playwright test maintenance
 
-Follow the [project guidelines](../../instructions/playwright-typescript.instructions.md).
+Follow the [project guidelines](../../instructions/coding-standards.instructions.md).
 
 ## Page Object Model (POM) Pattern - MANDATORY
 

@@ -267,8 +267,13 @@ demo-juvare/
 │   ├── auth.spec.ts
 │   ├── cart.spec.ts
 │   ├── checkout.spec.ts
+│   ├── example.spec.ts
+│   ├── footer.spec.ts
+│   ├── home-page.spec.ts
 │   ├── inventory.spec.ts
+│   ├── page-objects.spec.ts
 │   ├── product-price-filter.spec.ts
+│   ├── seed.spec.ts            (placeholder - not real coverage)
 │   └── data/
 │       ├── users.ts
 │       └── checkout.ts
@@ -278,15 +283,28 @@ demo-juvare/
 │   ├── InventoryPage.ts
 │   ├── CartPage.ts
 │   ├── CheckoutPage.ts
-│   └── FooterPage.ts
+│   ├── FooterPage.ts
+│   └── HomePage.ts             (empty subclass of LoginPage)
 ├── fixtures/
 │   └── test.ts
 ├── utils/
 │   └── environment.ts
 ├── playwright.config.ts
-└── ai-artifacts/
-    └── instructions/
-        └── playwright-ai-artifacts.instruction.md
+└── .github/                    (AI guidance - single source of truth)
+    ├── instructions/
+    │   ├── coding-standards.instructions.md
+    │   ├── approval-rules.instructions.md
+    │   └── agent-rules.instructions.md
+    ├── prompts/
+    │   ├── create-test.prompt.md
+    │   └── diagnose-failure.prompt.md
+    ├── agents/
+    │   ├── playwright-test-planner.agent.md
+    │   ├── playwright-test-generator.agent.md
+    │   └── playwright-test-healer.agent.md
+    └── skills/
+        ├── playwright/Skill.md
+        └── reporting/Skill.md
 ```
 
 ## Before Writing Tests or Page Objects
