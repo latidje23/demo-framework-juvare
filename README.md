@@ -14,7 +14,7 @@ npm run test:report
 
 ## Prerequisites
 
-- **Node.js:** 22.18+ (22.x) or 24.11+ (24.x)
+- **Node.js:** 24 LTS or newer (recommended: 26.x)
 - **npm:** Latest version
 - **Internet:** Download dependencies, browsers, and reach SauceDemo
 
