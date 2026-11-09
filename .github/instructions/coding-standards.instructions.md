@@ -17,6 +17,11 @@ Single source of truth for generating and maintaining this project's Playwright 
 - Prefer locators in this order: `getByTestId()` (backed by `data-test` attributes), accessible roles with `getByRole()`, then `getByLabel()`. Avoid CSS classes, broad selectors, and XPath.
 - Use `test.describe()` to group tests and `test.beforeEach()` for shared setup. Add comments only to explain non-obvious intent.
 - Do not use `page.waitForNavigation()`, `page.waitForLoadState()`, `page.waitForTimeout()`, or `page.evaluate()`. Prefer Playwright's auto-waiting, explicit assertions, and APIs. Do not create duplicate page objects for similar pages or leave `test.only()` in committed code.
+- Use available page object classes.
+- Create a new page object class only if the page does not exist.
+- Created test spec files must contain only tests as per the Page Object Model (POM) standard.
+- Do not update other instructions or something else.
+
 
 ## Evidence and Verification
 
