@@ -1,32 +1,24 @@
 {
-    "compilerOptions": {
-      "target": "ESNext",              // Compile to the latest ECMAScript version
-      "module": "node16",            // Module system for Node.js compatibility
-      "moduleResolution": "node16",      // Resolve modules like Node.js
-      "strict": true,                  // Enable all strict type-checking options
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "esModuleInterop": true,         // Allows default imports for CommonJS modules
-      "skipLibCheck": true,            // Skip type checking of declaration files for faster builds
-      "forceConsistentCasingInFileNames": true, // Ensure consistent file naming
-      "outDir": "./dist",              // Output directory for compiled JavaScript files
-      "rootDir": ".",              // Root directory for TypeScript files
-      "resolveJsonModule": true,       // Allow importing of JSON files
-      "types": ["node", "playwright"], // Include the types for Node.js and Playwright
-      "declaration": true,             // Generate .d.ts files for type declarations
-      "sourceMap": true                // Generate source maps for easier debugging
-    },
-    "include": [
-      "playwright.config.ts",
-  "fixtures/**/*.ts",
-  "pages/**/*.ts",
-  "utils/**/*.ts",
-  "src/**/*.ts",
-  "tests/**/*.ts",
-  "globals/*.ts"
-    ],
-    "exclude": [
-      "node_modules",  // Exclude node_modules from compilation
-      "dist"           // Exclude the output directory
-    ]
-  }
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true
+  },
+  "include": [
+    "playwright.config.ts",
+    "fixtures/**/*.ts",
+    "pages/**/*.ts",
+    "utils/**/*.ts",
+    "test-setup/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "playwright-report", "test-results"]
+}
